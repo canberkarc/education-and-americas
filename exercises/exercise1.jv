@@ -1,13 +1,18 @@
-pipeline AirportsPipeline {
+pipeline MyAirportsPipeline {
     
-    DataExtractor
+    // Author: Canberk Arıcı
+
+    // Pipeline to extract data from given url,
+    // interpret the data as a table
+    // then load it into a database
+    AirportsDataExtractor
         -> AirportsTextFileInterpreter
         -> AirportsCSVInterpreter
         -> AirportsTableInterpreter
         -> DatabaseLoader;
 
     // Extractor block to extract data from the given URL
-    block DataExtractor oftype HttpExtractor { 
+    block AirportsDataExtractor oftype HttpExtractor { 
         url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B"; 
     }
 
@@ -15,6 +20,7 @@ pipeline AirportsPipeline {
     block AirportsTextFileInterpreter oftype TextFileInterpreter {}
 
     // Block to interpret the CSV data
+    // with specific delimiters and enclosings
     block AirportsCSVInterpreter oftype CSVInterpreter { 
         enclosing: '"'; 
         delimiter: ";";
@@ -24,7 +30,7 @@ pipeline AirportsPipeline {
     // Block to interpret the data as a table with specific columns 
     // except the columns Zeitzone, DST, Zeitzonen-Datenbank and geo_punkt
     block AirportsTableInterpreter oftype TableInterpreter {
-        header: true;
+        header: true; // First row is header
         columns: [
             "Lfd. Nummer" oftype integer,
             "Name des Flughafens" oftype text,
