@@ -1,0 +1,55 @@
+pipeline MyTreePipeline {
+    
+    // Author: Canberk Arıcı
+
+    // Pipeline to extract data from given url,
+    // interpret the data as a table
+    // then load it into a database
+    TreeDataExtractor
+        -> TreeTextFileInterpreter
+        -> TreeCSVInterpreter
+        -> TreeTableInterpreter
+        -> DatabaseLoader;
+
+    // Extractor block to extract data from the given URL
+    block TreeDataExtractor oftype HttpExtractor { 
+        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv"; 
+    }
+
+    // Block to interpret the text file
+    block TreeTextFileInterpreter oftype TextFileInterpreter {}
+
+    // Block to interpret the CSV data
+    block TreeCSVInterpreter oftype CSVInterpreter { 
+        delimiter: ";";
+        enclosing: '"';
+    }
+
+    // Block to interpret the data as a table with specific columns 
+    block TreeTableInterpreter oftype TableInterpreter {
+        header: true; 
+        columns: [
+            "lfd_nr" oftype integer,
+            "stadtteil" oftype stadtteilSpecialDataType,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            "id" oftype text,
+            "baumfamilie" oftype text
+        ];
+
+    }
+
+    // load data into a SQLite database
+    block DatabaseLoader oftype SQLiteLoader { 
+        table: "trees"; 
+        file: "./trees.sqlite"; 
+    }
+}
+
+valuetype stadtteilSpecialDataType oftype text {
+  constraints: [
+    OnlyCapitalLettersAndDigits,
+  ];
+}
+
+constraint OnlyCapitalLettersAndDigits on text: value matches /^Vogelsang.*/;
