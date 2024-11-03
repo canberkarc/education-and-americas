@@ -21,11 +21,12 @@ This project explores the influence of economic parameters on educational outcom
 ### Datasource1: CEPAL Statistics and Indicators
 * Metadata URL: https://statistics.cepal.org/portal/cepalstat/dashboard.html?theme=1&lang=en
 * Data Type: Excel
-* Public expenditure on education
-* GDP
-* Adjusted net enrollment rate for children, one year before the official primary school entry age, by sex
-* Illiteracy rate by sex, age group and area
-* Population 15 years of age and older, by years of education, sex and area
+* Data to be Collected:
+*   Public expenditure on education
+*   GDP
+*   Adjusted net enrollment rate for children, one year before the official primary school entry age, by sex
+*   Illiteracy rate by sex, age group and area
+*   Population 15 years of age and older, by years of education, sex and area
 
 ### Datasource2: World Bank - Pupil-teacher ratio
 * Metadata URL: https://data.worldbank.org/indicator/SE.PRM.ENRL.TC.ZS?end=2019&start=1970&view=chart
