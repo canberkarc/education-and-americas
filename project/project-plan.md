@@ -37,13 +37,13 @@ This project explores the influence of economic parameters on educational outcom
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Find Suitable Datasets [#1] [i1]
-2. Examine Found Datasets [#2] [i2]
-3. Build an Automated Data Pipeline [#3] [i3]
-4. Add Automated Tests for the Project [#4] [i4]
-5. CI Setup [#5] [i5]
-6. Final Report [#6] [i6]
-7. Create Project Presentation [#7] [i7]
+1. Find Suitable Datasets [#1][i1]
+2. Examine Found Datasets [#2][i2]
+3. Build an Automated Data Pipeline [#3][i3]
+4. Add Automated Tests for the Project [#4][i4]
+5. CI Setup [#5][i5]
+6. Final Report [#6][i6]
+7. Create Project Presentation [#7][i7]
 
 [i1]: https://github.com/canberkarc/education-and-americas/issues/1
 [i2]: https://github.com/canberkarc/education-and-americas/issues/2
