@@ -1,6 +1,6 @@
 # Project Plan
 
-## Examining the Relationship Between Economic and Educational Factors in South American Countries Over the Last 20 Years
+## Analyzing the Relationship Between GDP, Public Education Expenditure, and Illiteracy Rates, Education Level, and Economic Activity Participation in Brazil, Colombia, Paraguay, and Peru (2002–2020)
 <!-- Give your project a short title. -->
 
 ## Main Question
