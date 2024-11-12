@@ -1,18 +1,18 @@
 # Project Plan
 
-## Analyzing the Relationship Between GDP, Public Education Expenditure, and Illiteracy Rates, Education Level, and Economic Activity Participation in Brazil and Colombia (2002–2020)
+## Analyzing the Relationship Between GDP, Public Education Expenditure, and Illiteracy Rates, Education Level, and Economic Activity Participation in Brazil, Colombia and Peru (2002–2020)
 <!-- Give your project a short title. -->
 
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
-1. How do GDP and public expenditure on education relate to selected educational outcomes in Brazil and Colombia from 2002 to 2020, specifically in terms of illiteracy rates, population with 13 years or more of education, and economic activity participation among the population with 13 years or more of education?
+1. How do GDP and public expenditure on education relate to selected educational outcomes in Brazil, Colombia and Peru from 2002 to 2020, specifically in terms of illiteracy rates, population with 13 years or more of education, and economic activity participation among the population with 13 years or more of education?
 
 ## Description 
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
 
-This project investigates how GDP and public expenditure on education relate to selected educational outcomes in Brazil and Colombia from 2002 to 2020. By analyzing GDP, public expenditure on education, illiteracy rates, the population with 13 years or more of education, and economic activity participation among this educated population, the study aims to identify patterns and relationships between these economic conditions and educational attainment in these countries. Through statistical analysis, I seek to highlight how these economic factors have influenced educational opportunities over this period.
+This project investigates how GDP and public expenditure on education relate to selected educational outcomes in Brazil, Colombia and Peru from 2002 to 2020. By analyzing GDP, public expenditure on education, illiteracy rates, the population with 13 years or more of education, and economic activity participation among this educated population, the study aims to identify patterns and relationships between these economic conditions and educational attainment in these countries. Through statistical analysis, I seek to highlight how these economic factors have influenced educational opportunities over this period.
 
 ## Datasources
 
