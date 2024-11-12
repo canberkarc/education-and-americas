@@ -8,7 +8,7 @@
 <!-- Think about one main question you want to answer based on the data. -->
 1. How do GDP and public expenditure on education relate to selected educational outcomes in Brazil, Colombia, Paraguay, and Peru from 2002 to 2020, specifically in terms of illiteracy rates, population with 13 years or more of education, and economic activity participation among the population with 13 years or more of education?
 
-## Description
+## Description 
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
 
