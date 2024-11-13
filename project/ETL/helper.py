@@ -12,38 +12,35 @@ logging.basicConfig(filename='./log.txt',
 def DataPipeline():
     logging.info("Starting the ETL process...")
 
-    # Extract and transform GDP data
+    # ETL process for GDP data
     logging.info("Extracting and transforming GDP data...")
     path_GdpData = extractGdpData()
     df_Gdp = transform_GdpData(path_GdpData)
+    load_data_to_sqlite(df_Gdp, "GDP")
 
-    # Extract and transform Illiteracy Rate data
+    # ETL process for Public Expenditure data
     logging.info("Extracting and transforming Illiteracy Rate data...")
     path_PublicExpenditureData = extractPublicExpenditureData()
     df_PublicExpenditure = transform_PublicExpenditureData(path_PublicExpenditureData)
+    load_data_to_sqlite(df_PublicExpenditure, "PublicExpenditure")
 
-    # Extract and transform Public Expenditure data
+    # ETL process for Economic Activity Participation data
     logging.info("Extracting and transforming Years of Education data...")
     path_EconomicActivityParticipation = extractEconomicActivityParticipationData()
     df_EconomicActivityParticipation = transform_EconomicActivityParticipationData(path_EconomicActivityParticipation)
+    load_data_to_sqlite(df_EconomicActivityParticipation, "EconomicActivityParticipation")
 
-    # Extract and transform Economic Activity Participation data
+    # ETL process for Illiteracy Rate data
     logging.info("Extracting and transforming Economic Activity Participation data...")
     path_IlliteracyRateData = extractIlliteracyRateData()
     df_IlliteracyRate =  transform_IlliteracyRateData(path_IlliteracyRateData)
+    load_data_to_sqlite(df_IlliteracyRate, "IlliteracyRate")
 
-    # Extract and transform Years of Education data
+    # ETL process for Years of Education data
     logging.info("Extracting and transforming Years of Education data...")
     path_YearsOfEducationData = extractYearsOfEducationData()
     df_YearsOfEducation = transform_YearsOfEducationData(path_YearsOfEducationData)
+    load_data_to_sqlite(df_YearsOfEducation, "YearsOfEducation")
 
-    logging.info("Merging the transformed DataFrames...")
-    df_final = df_IlliteracyRate.merge(df_YearsOfEducation, on='Year', how='outer') \
-                                .merge(df_EconomicActivityParticipation, on='Year', how='outer') \
-                                .merge(df_PublicExpenditure, on='Year', how='outer') \
-                                .merge(df_Gdp, on='Year', how='outer')
-
-    logging.info("Loading the final DataFrame to the SQLite database...")
-    load_data_to_sqlite(df_final)
 
     logging.info("ETL process completed successfully!")

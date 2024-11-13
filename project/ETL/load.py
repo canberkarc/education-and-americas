@@ -8,7 +8,7 @@ logging.basicConfig(filename='./log.txt',
 	level=logging.INFO)
 
 #This function saves a pandas DataFrame to a SQLite database file in the ./data directory.
-def load_data_to_sqlite(df):
+def load_data_to_sqlite(df, table):
   
     # Create a connection to the SQLite database
     logging.info("Creating a connection to the SQLite database...")
@@ -16,7 +16,7 @@ def load_data_to_sqlite(df):
 
     # Save the DataFrame to the SQLite database
     logging.info("Saving the DataFrame to the SQLite database...")
-    df.to_sql('data', conn, if_exists='replace', index=False)
+    df.to_sql(table, conn, if_exists='replace', index=False)
 
     logging.info("Data saved successfully!")
 
