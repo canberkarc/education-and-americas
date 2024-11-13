@@ -20,6 +20,7 @@ This project investigates how GDP and public expenditure on education relate to 
 
 ### Datasource1: CEPAL Statistics and Indicators
 * Metadata URL: https://statistics.cepal.org/portal/cepalstat/dashboard.html?theme=1&lang=en
+* Data URL: Not available
 * Data Type: Excel
 * Data to be Collected:
   - Public expenditure on education
@@ -29,7 +30,7 @@ This project investigates how GDP and public expenditure on education relate to 
 
 ### Datasource2: World Bank - GDP per capita (current US$)
 * Metadata URL: https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?end=2020&start=2002&view=chart
-* Data URL: https://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.CD?downloadformat=excel
+* Data URL: Not available
 * Data Type: Excel
 
 ## Work Packages
