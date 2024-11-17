@@ -3,6 +3,7 @@ from time import sleep
 import logging
 import os
 import traceback
+from retry import retry
 
 logging.basicConfig(filename='./log.txt',
 	filemode='a',
@@ -25,24 +26,34 @@ def get_downloads_path():
 
 directory = get_downloads_path()
 
-
 def get_last_downloaded_file(directory):
     
-    # List all files in the directory
-    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
-    
-    # If there are no files in the directory, return None
-    if not files:
-        return None
-    
-    # Find the most recently modified file
-    latest_file = max(files, key=lambda f: os.path.getmtime(os.path.join(directory, f)))
-    
-    # Return the full path of the most recently modified file
-    full_path = os.path.join(directory, latest_file)
-    normalized_path = os.path.normpath(full_path)
-    return normalized_path.replace('\\', '/')
+    try:
+        logging.info("Getting the most recently downloaded file...")
 
+        # List all files in the directory
+        files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+        
+        # If there are no files in the directory, return None
+        if not files:
+            return None
+        
+        # Find the most recently modified file
+        latest_file = max(files, key=lambda f: os.path.getmtime(os.path.join(directory, f)))
+        
+        logging.info(f"The most recently modified file is: {latest_file}")
+
+        # Return the full path of the most recently modified file
+        full_path = os.path.join(directory, latest_file)
+        normalized_path = os.path.normpath(full_path)
+
+        logging.info(f"The full path of the most recently modified file is: {normalized_path}")
+        return normalized_path.replace('\\', '/')
+    
+    except Exception as e:
+        logging.error(traceback.format_exc())  # Log the traceback
+
+@retry(tries=3, delay=10, logger=logging)
 # Extract GDP data
 def extractGdpData():
 
@@ -60,7 +71,7 @@ def extractGdpData():
         sleep(1)
 
         click('EXCEL')
-        sleep(10)
+        sleep(15)
 
         lastDownloadedFile = get_last_downloaded_file(directory)
 
@@ -73,7 +84,7 @@ def extractGdpData():
     except Exception as e:
         logging.error(traceback.format_exc())  # Log the traceback
 
-
+@retry(tries=3, delay=10, logger=logging)
 # Extact illiteracy rate data
 def extractIlliteracyRateData():
     
@@ -95,7 +106,7 @@ def extractIlliteracyRateData():
             driver.execute_script("window.scrollBy(0, 500);")
             sleep(1)
             click('.XLSX')
-            sleep(5)
+            sleep(15)
 
             lastDownloadedFile = get_last_downloaded_file(directory)
     
@@ -108,7 +119,7 @@ def extractIlliteracyRateData():
         except Exception as e:
             logging.error(traceback.format_exc())  # Log the traceback
 
-
+@retry(tries=3, delay=10, logger=logging)
 # Extract years of education data
 def extractYearsOfEducationData():
 
@@ -136,7 +147,7 @@ def extractYearsOfEducationData():
         sleep(1)
 
         click('.XLSX')
-        sleep(5)
+        sleep(15)
 
         lastDownloadedFile = get_last_downloaded_file(directory)
 
@@ -149,7 +160,7 @@ def extractYearsOfEducationData():
     except Exception as e:
         logging.error(traceback.format_exc())  # Log the traceback
 
-
+@retry(tries=3, delay=10, logger=logging)
 def extractEconomicActivityParticipationData():
     
     try:
@@ -177,7 +188,7 @@ def extractEconomicActivityParticipationData():
         sleep(1)
 
         click('.XLSX')
-        sleep(5)
+        sleep(15)
 
         lastDownloadedFile = get_last_downloaded_file(directory)
 
@@ -190,7 +201,7 @@ def extractEconomicActivityParticipationData():
     except Exception as e:
         logging.error(traceback.format_exc())  # Log the traceback
 
-
+@retry(tries=3, delay=10, logger=logging)
 # Extract public expenditure data
 def extractPublicExpenditureData():
     try:
@@ -215,7 +226,7 @@ def extractPublicExpenditureData():
         sleep(1)
 
         click('.XLSX')
-        sleep(5)
+        sleep(15)
 
         lastDownloadedFile = get_last_downloaded_file(directory)
 

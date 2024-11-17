@@ -1,5 +1,6 @@
 import sqlite3
 import logging
+import traceback
 
 logging.basicConfig(filename='./log.txt',
 	filemode='a',
@@ -9,17 +10,20 @@ logging.basicConfig(filename='./log.txt',
 
 #This function saves a pandas DataFrame to a SQLite database file in the ./data directory.
 def load_data_to_sqlite(df, table):
-  
-    # Create a connection to the SQLite database
-    logging.info("Creating a connection to the SQLite database...")
-    conn = sqlite3.connect('./data/education_and_americas.db')
 
-    # Save the DataFrame to the SQLite database
-    logging.info("Saving the DataFrame to the SQLite database...")
-    df.to_sql(table, conn, if_exists='replace', index=False)
+    try:
+        # Create a connection to the SQLite database
+        logging.info("Creating a connection to the SQLite database...")
+        conn = sqlite3.connect('./data/education_and_americas.db')
 
-    logging.info("Data saved successfully!")
+        # Save the DataFrame to the SQLite database
+        logging.info("Saving the DataFrame to the SQLite database...")
+        df.to_sql(table, conn, if_exists='replace', index=False)
 
-    # Close the connection
-    conn.close()
+        logging.info("Data saved successfully!")
 
+        # Close the connection
+        conn.close()
+
+    except Exception as e:
+        logging.error(traceback.format_exc())  # Log the traceback
