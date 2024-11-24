@@ -14,7 +14,7 @@ def load_data_to_sqlite(df, table):
     try:
         # Create a connection to the SQLite database
         logging.info("Creating a connection to the SQLite database...")
-        conn = sqlite3.connect('./data/education_and_americas.db')
+        conn = sqlite3.connect('./data/educationAndEconomy_BrazilColombiaPeru.db')
 
         # Save the DataFrame to the SQLite database
         logging.info("Saving the DataFrame to the SQLite database...")
