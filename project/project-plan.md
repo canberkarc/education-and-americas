@@ -29,7 +29,7 @@ This project investigates how GDP and public expenditure on education relate to 
   - Population 15 years of age and older participating in economic activity, by years of education
 
 ### Datasource2: World Bank - GDP per capita (current US$)
-* Metadata URL: https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?end=2020&start=2002&view=chart
+* Metadata URL: https://data.worldbank.org/
 * Data URL: Not available
 * Data Type: Excel
 
