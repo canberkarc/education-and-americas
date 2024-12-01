@@ -1,6 +1,7 @@
 import sqlite3
 import logging
 import traceback
+import os
 
 logging.basicConfig(filename='./log.txt',
 	filemode='a',
@@ -14,7 +15,10 @@ def load_data_to_sqlite(df, table):
     try:
         # Create a connection to the SQLite database
         logging.info("Creating a connection to the SQLite database...")
-        conn = sqlite3.connect('./data/educationAndEconomy_BrazilColombiaPeru.db')
+        base_dir = os.getcwd()
+        data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
+        db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
+        conn = sqlite3.connect(db_file_path)
 
         # Save the DataFrame to the SQLite database
         logging.info("Saving the DataFrame to the SQLite database...")
@@ -27,3 +31,4 @@ def load_data_to_sqlite(df, table):
 
     except Exception as e:
         logging.error(traceback.format_exc())  # Log the traceback
+
