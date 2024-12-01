@@ -7,3 +7,6 @@
 
 # Ignore log.txt file
 log.txt
+
+# Ignore all .sqlite files
+*.sqlite

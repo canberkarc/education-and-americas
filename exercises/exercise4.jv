@@ -1,0 +1,125 @@
+pipeline MyTemperaturePipeline {
+    
+    // Author: Canberk Arıcı
+
+
+    TemperatureDataExtractor
+        -> TemperatureZipArchiveInterpreter
+        -> TemperatureFilePicker
+        -> TemperatureTextFileInterpreter
+        -> TemperatureCSVInterpreter
+        -> TemperatureHeaderRenamer
+        -> TemperatureHeaderRenamer_BatteryTemperature
+        -> TemperatureTableInterpreter
+        -> CelsiusToFahrenheitTransformer
+        -> CelsiusToFahrenheitTransformer_BatteryTemperature
+        -> DatabaseLoader;
+
+    block TemperatureDataExtractor oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+        retries: 3;
+    }
+
+    block TemperatureZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block TemperatureFilePicker oftype FilePicker {
+        path: "./data.csv";
+    }
+
+    block TemperatureTextFileInterpreter oftype TextFileInterpreter {}
+
+    block TemperatureCSVInterpreter oftype CSVInterpreter { 
+        delimiter: ";";
+    }
+
+    block TemperatureHeaderRenamer oftype CellWriter {
+        at: range A1:E1 ; 
+        write: ['id', 'producer', 'model', 'month', 'temperature'];
+    
+    }
+
+    block TemperatureHeaderRenamer_BatteryTemperature oftype CellWriter {
+        at: cell J1;
+        write: ['battery_temperature'];
+    
+    }
+
+    block TemperatureTableInterpreter oftype TableInterpreter {
+        header: true; 
+        columns: [
+            'id' oftype ValidId , 
+            "producer" oftype ValidProducer,
+            "model" oftype ValidModel,
+            "month" oftype ValidMonth,
+            "temperature" oftype ValidTemperature,
+            "battery_temperature" oftype ValidTemperature
+        ];
+    }
+
+    transform CelsiusToFahrenheit {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius * 9/5) + 32;
+    }
+
+    block CelsiusToFahrenheitTransformer oftype TableTransformer {
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
+        uses: CelsiusToFahrenheit;
+    }
+
+    block CelsiusToFahrenheitTransformer_BatteryTemperature oftype TableTransformer {
+        inputColumns: ['battery_temperature'];
+        outputColumn: 'battery_temperature';
+        uses: CelsiusToFahrenheit;
+    }
+
+    // load data into a SQLite database
+    block DatabaseLoader oftype SQLiteLoader { 
+        table: "temperatures"; 
+        file: "./temperatures.sqlite"; 
+    }
+}
+
+
+valuetype ValidId oftype integer {
+    constraints :[ValidIdVal];
+}
+
+valuetype ValidProducer oftype text {
+    constraints :[NotEmpty];
+}
+
+valuetype ValidModel oftype text {
+    constraints :[NotEmpty];
+}
+
+valuetype ValidMonth oftype integer {
+    constraints :[ValidMonthRange];
+}
+
+valuetype ValidTemperature oftype decimal {
+    constraints :[ValidTemperatureVal];
+}
+
+constraint ValidIdVal oftype RangeConstraint { 
+    lowerBound: 0;
+    lowerBoundInclusive: false;
+    }
+
+constraint NotEmpty on text: value matches /^.+$/;
+
+constraint ValidMonthRange oftype RangeConstraint { 
+    lowerBound: 1;
+    lowerBoundInclusive: true;
+    upperBound: 12;
+    upperBoundInclusive: true;
+    }
+
+constraint ValidTemperatureVal oftype RangeConstraint { 
+    lowerBound: -459.67;
+    lowerBoundInclusive: true;
+    }
+
