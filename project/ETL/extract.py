@@ -29,17 +29,20 @@ def get_downloads_path():
 directory = get_downloads_path()
 
 def start_custom_firefox():
-    firefox_bin = "/snap/firefox/current/usr/lib/firefox/firefox"
-    firefoxdriver_bin = "/snap/firefox/current/usr/lib/firefox/geckodriver"
-    
-    options = Options()
-    options.add_argument('--headless')
-    options.binary_location = firefox_bin
+    if os.getenv('GITHUB_ACTIONS') == 'true':
+        firefox_bin = "/snap/firefox/current/usr/lib/firefox/firefox"
+        firefoxdriver_bin = "/snap/firefox/current/usr/lib/firefox/geckodriver"
+        
+        options = Options()
+        options.add_argument('--headless')
+        options.binary_location = firefox_bin
 
-    service = webdriver.firefox.service.Service(executable_path=firefoxdriver_bin)
+        service = webdriver.firefox.service.Service(executable_path=firefoxdriver_bin)
 
-    driver = webdriver.Firefox(service=service, options=options)
-    helium.set_driver(driver)
+        driver = webdriver.Firefox(service=service, options=options)
+        helium.set_driver(driver)
+    else:
+        driver = helium.start_firefox(headless=True)
 
 def get_last_downloaded_file(directory):
     
@@ -259,3 +262,4 @@ def extractPublicExpenditureData():
     except Exception as e:
         logging.error(traceback.format_exc())  # Log the traceback
 
+print()
