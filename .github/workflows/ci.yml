@@ -36,6 +36,10 @@ jobs:
         sudo mv geckodriver /usr/local/bin/
         rm geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
 
+    - name: Set Firefox binary location
+      run: |
+        echo "FIREFOX_BIN=/usr/bin/firefox" >> $GITHUB_ENV
+
     - name: Run tests
       run: |
         cd project
