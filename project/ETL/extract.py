@@ -29,11 +29,16 @@ def get_downloads_path():
 directory = get_downloads_path()
 
 def start_custom_firefox():
+    firefox_bin = "/snap/firefox/current/usr/lib/firefox/firefox"
+    firefoxdriver_bin = "/snap/firefox/current/usr/lib/firefox/geckodriver"
+    
     options = Options()
-    options.headless = True
-    options.binary_location = os.getenv("FIREFOX_BIN", "/usr/bin/firefox")
+    options.add_argument('--headless')
+    options.binary_location = firefox_bin
 
-    driver = webdriver.Firefox(options=options)
+    service = webdriver.firefox.service.Service(executable_path=firefoxdriver_bin)
+
+    driver = webdriver.Firefox(service=service, options=options)
     helium.set_driver(driver)
 
 def get_last_downloaded_file(directory):
