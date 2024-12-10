@@ -39,10 +39,6 @@ def test_db_tables():
     # Run the data pipeline
     main()
 
-    # base_dir = os.getcwd()
-    # data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
-    # db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
-
     # Connect to the SQLite database
     conn = sqlite3.connect(db_file_path)
     cursor = conn.cursor()
@@ -83,13 +79,8 @@ def test_table_structure():
     if os.path.exists(db_file_path):
         os.remove(db_file_path)
 
-
     # Run the data pipeline
     main()
-
-    # base_dir = os.getcwd()
-    # data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
-    # db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
     
     # Connect to the SQLite database
     conn = sqlite3.connect(db_file_path)
@@ -120,5 +111,3 @@ def test_table_structure():
     conn.close()
 
     print("Data pipeline test passed and all tables have the correct structure.")
-
-print()

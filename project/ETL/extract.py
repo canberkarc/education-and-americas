@@ -29,6 +29,7 @@ def get_downloads_path():
 directory = get_downloads_path()
 
 def start_custom_firefox():
+    # If the code is running on GitHub Actions, use the Firefox snap package
     if os.getenv('GITHUB_ACTIONS') == 'true':
         firefox_bin = "/snap/firefox/current/usr/lib/firefox/firefox"
         firefoxdriver_bin = "/snap/firefox/current/usr/lib/firefox/geckodriver"
@@ -261,5 +262,3 @@ def extractPublicExpenditureData():
     
     except Exception as e:
         logging.error(traceback.format_exc())  # Log the traceback
-
-print()
