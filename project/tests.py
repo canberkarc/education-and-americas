@@ -19,9 +19,11 @@ def test_data_pipeline():
 
 def test_db_tables():
 
-    base_dir = os.getcwd()
-    data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
-    db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
+    # base_dir = os.getcwd()
+    # data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
+    # db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
+
+    db_file_path = 'data/educationAndEconomy_BrazilColombiaPeru.db'
 
     # Connect to the SQLite database
     conn = sqlite3.connect(db_file_path)
@@ -53,10 +55,12 @@ def test_db_tables():
 
 def test_table_structure():
 
-    base_dir = os.getcwd()
-    data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
-    db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
+    # base_dir = os.getcwd()
+    # data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
+    # db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
 
+    db_file_path = 'data/educationAndEconomy_BrazilColombiaPeru.db'
+    
     # Connect to the SQLite database
     conn = sqlite3.connect(db_file_path)
     cursor = conn.cursor()
