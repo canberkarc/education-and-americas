@@ -23,7 +23,11 @@ def test_db_tables():
     # data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
     # db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
 
-    db_file_path = 'data/educationAndEconomy_BrazilColombiaPeru.db'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir = os.path.abspath(os.path.join(script_dir, '..'))
+    data_dir = os.path.join(base_dir, 'data')
+    db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
+
 
     # Connect to the SQLite database
     conn = sqlite3.connect(db_file_path)
@@ -59,7 +63,11 @@ def test_table_structure():
     # data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
     # db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
 
-    db_file_path = 'data/educationAndEconomy_BrazilColombiaPeru.db'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir = os.path.abspath(os.path.join(script_dir, '..'))
+    data_dir = os.path.join(base_dir, 'data')
+    db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
+
     
     # Connect to the SQLite database
     conn = sqlite3.connect(db_file_path)
@@ -90,3 +98,5 @@ def test_table_structure():
     conn.close()
 
     print("Data pipeline test passed and all tables have the correct structure.")
+
+print()

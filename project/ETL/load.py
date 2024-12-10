@@ -15,8 +15,9 @@ def load_data_to_sqlite(df, table):
     try:
         # Create a connection to the SQLite database
         logging.info("Creating a connection to the SQLite database...")
-        base_dir = os.getcwd()
-        data_dir = os.path.abspath(os.path.join(base_dir, '..', 'data'))
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        base_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
+        data_dir = os.path.join(base_dir, 'data')
         db_file_path = os.path.join(data_dir, 'educationAndEconomy_BrazilColombiaPeru.db')
         conn = sqlite3.connect(db_file_path)
 
