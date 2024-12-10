@@ -41,3 +41,9 @@ jobs:
         cd project
         chmod +x tests.sh
         ./tests.sh
+
+    - name: Upload database artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: database
+        path: project/data/educationAndEconomy_BrazilColombiaPeru.db
