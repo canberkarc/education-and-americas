@@ -1,0 +1,63 @@
+pipeline MyStopsPipeline {
+    
+    // Author: Canberk Arıcı
+
+
+    StopsGtfsDataExtractor
+        -> StopsFilePicker
+        -> StopsTextFileInterpreter
+        -> StopsCSVInterpreter
+        -> StopsTableInterpreter
+        -> DatabaseLoader;
+
+    block StopsGtfsDataExtractor oftype GTFSExtractor  {
+        url: "https://gtfs.rhoenenergie-bus.de/GTFS.zip";
+    }
+
+    block StopsFilePicker oftype FilePicker {
+        path: "/stops.txt";
+    }
+
+    block StopsTextFileInterpreter oftype TextFileInterpreter {
+        encoding: "utf8";
+    }
+
+    block StopsCSVInterpreter oftype CSVInterpreter { 
+        delimiter: ",";
+        enclosing: '"';
+    }
+
+    block StopsTableInterpreter oftype TableInterpreter {
+        header: true; 
+        columns: [
+            "stop_id" oftype integer,
+            "stop_name" oftype text,
+            "stop_lat" oftype ValidGeoCoordinate,
+            "stop_lon" oftype ValidGeoCoordinate,
+            "zone_id" oftype ValidZone,
+        ];
+    }
+
+    block DatabaseLoader oftype SQLiteLoader { 
+        table: "stops"; 
+        file: "./gtfs.sqlite"; 
+    }
+}
+
+
+valuetype ValidZone oftype integer {
+    constraints :[ValidZoneVal];
+}
+
+valuetype ValidGeoCoordinate oftype decimal {
+    constraints :[ValidGeoRange];
+}
+
+constraint ValidZoneVal on integer : value == 1925;
+
+constraint ValidGeoRange oftype RangeConstraint {
+    lowerBound: -90.0;
+    lowerBoundInclusive: true;
+    upperBound: 90.0;
+    upperBoundInclusive: true;
+}
