@@ -1,5 +1,5 @@
 # Analyzing the Relationship Between GDP, Public Education Expenditure,and Illiteracy Rates, Education Level, and Economic Activity Participation in Brazil, Colombia and Peru (2002–2020)
-![Project Image](https://github.com/canberkarc/education-and-americas/tree/main/project/image.jpg)
+![Project Image](project/image.jpg)
 Reference: Image by [Steve Buissinne](https://pixabay.com/users/stevepb-282134/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=948603) from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=948603)
 
 This project examines how GDP and public expenditure on education correlate with key educational outcomes in Brazil, 
@@ -42,13 +42,17 @@ education-and-americas/
 
 • GDP plays an important role in educational progress, while improvement in education
 access is needed in Brazil, Colombia, and Peru.
+
 • Public expenditure on education appears to help reduce illiteracy and facilitate increased
 funding for education but in Colombia, there seems to be possible inefficiencies in
 education funding.
+
 • A higher GDP does not always have a positive impact on education funding.
+
 • While GDP and public expenditure on education positively correlate in Peru, Public
 Expenditure on Education shows fluctuations, suggesting that there may be challenges in
 sustaining education funding despite GDP growth.
+
 • Population with higher levels of education is associated with higher rates of economic
 participation in all three countries.
 
